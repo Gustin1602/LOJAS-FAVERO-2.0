@@ -1,0 +1,1 @@
+# LOJAS-FAVERO-2.0
