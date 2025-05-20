@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho de Compras - Lojas Fávero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #carrinho {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .item strong {
+            flex: 1;
+        }
+
+        .item button {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .item button:hover {
+            background-color: #c62828;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #finalizarBtn {
+            display: block;
+            margin: 20px auto;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #finalizarBtn:hover {
+            background-color: #218838;
+        }
+
+        #formulario {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        #formulario input, #formulario select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #concluirPedido {
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #concluirPedido:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seu Carrinho</h1>
+    <div id="carrinho"></div>
+    <div class="total" id="total"></div>
+    <button id="finalizarBtn" onclick="mostrarFormulario()">Finalizar Compra</button>
+
+    <div id="formulario">
+        <h2>Dados para Entrega</h2>
+        <input type="text" id="numero" placeholder="Número de Telefone">
+        <input type="text" id="endereco" placeholder="Endereço">
+        <input type="text" id="cpf" placeholder="CPF">
+        <select id="pagamento">
+            <option value="">Selecione a forma de pagamento</option>
+            <option value="pix">Pix</option>
+            <option value="debito">Cartão de Débito</option>
+            <option value="credito">Cartão de Crédito</option>
+        </select>
+        <button id="concluirPedido" onclick="concluirCompra()">Concluir Pedido</button>
+    </div>
+
+    <a href="TELA DE INICIO.html">← Voltar para a loja</a>
+
+    <script>
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        function renderizarCarrinho() {
+            const carrinhoDiv = document.getElementById('carrinho');
+            const totalDiv = document.getElementById('total');
+            carrinhoDiv.innerHTML = '';
+
+            if (carrinho.length === 0) {
+                carrinhoDiv.innerHTML = '<p>Seu carrinho está vazio.</p>';
+                totalDiv.textContent = '';
+                document.getElementById('finalizarBtn').style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            carrinho.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `
+                    <strong>${item.produto}</strong>
+                    <span>R$ ${item.preco.toFixed(2)}</span>
+                    <button onclick="removerItem(${index})">Remover</button>
+                `;
+                carrinhoDiv.appendChild(div);
+                total += item.preco;
+            });
+
+            totalDiv.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            renderizarCarrinho();
+        }
+
+        function mostrarFormulario() {
+            const form = document.getElementById('formulario');
+            form.style.display = 'block';
+
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', validarFormulario);
+            });
+        }
+
+        function validarFormulario() {
+            const numero = document.getElementById('numero').value.trim();
+            const endereco = document.getElementById('endereco').value.trim();
+            const cpf = document.getElementById('cpf').value.trim();
+            const pagamento = document.getElementById('pagamento').value;
+
+            const concluirBtn = document.getElementById('concluirPedido');
+
+            if (numero && endereco && cpf && pagamento) {
+                concluirBtn.style.display = 'inline-block';
+            } else {
+                concluirBtn.style.display = 'none';
+            }
+        }
+
+        function concluirCompra() {
+            alert('Pedido confirmado! Seu produto está sendo entregue.');
+            localStorage.removeItem('carrinho');
+            window.location.href = "TELA DE INICIO.html";
+        }
+
+        renderizarCarrinho();
+    </script>
+</body>
+</html>

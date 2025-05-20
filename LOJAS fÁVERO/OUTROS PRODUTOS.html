@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outros Produtos - Lojas Fávero</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        .produto {
+            display: inline-block;
+            width: 30%;
+            margin: 10px 1%;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .produto:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .produto img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .produto h3 {
+            margin: 10px 0 5px;
+        }
+
+        .produto p {
+            margin: 5px 0;
+        }
+
+        .produto .preco {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .produto button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .produto button:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .produto {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .produto {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Lojas Fávero</h1>
+    <nav>
+        <ul>
+            <li><a href="TELA DE INICIO.html">Início</a></li>
+            <li><a href="CONTATO.html">Contato</a></li>
+            <li><a href="outros-produtos.html">Outros Produtos</a></li>
+            <li><a href="#" onclick="mostrarCarrinho()">Carrinho (<span id="carrinho-count">0</span>)</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Outros Produtos Disponíveis</h2>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/61KQTW4PqfL._AC_UL495_SR435,495_.jpg" alt="Galaxy Watch5 Pro">
+        <h3>Galaxy Watch5 Pro</h3>
+        <p>Relógio inteligente com GPS, monitor de saúde e bateria duradoura.</p>
+        <p class="preco">R$ 1.499,90</p>
+        <button onclick="adicionarAoCarrinho('Galaxy Watch5 Pro', 1499.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/61saZHQI52L.jpg" alt="Mouse Gamer Redragon">
+        <h3>Mouse Gamer Redragon Cobra</h3>
+        <p>RGB, sensor de alta precisão e botões programáveis.</p>
+        <p class="preco">R$ 159,90</p>
+        <button onclick="adicionarAoCarrinho('Mouse Gamer Redragon Cobra', 159.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/teclado-gamer-redragon-kumara-preto-switch-brown-k552rgb-brs-2.jpg" alt="Teclado Mecânico Redragon">
+        <h3>Teclado Mecânico Redragon Kumara</h3>
+        <p>Switch Brown, RGB, layout ABNT2, ideal para gamers e programadores.</p>
+        <p class="preco">R$ 249,90</p>
+        <button onclick="adicionarAoCarrinho('Teclado Mecânico Redragon Kumara', 249.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/236886750c7a8248f21.webp" alt="Echo Dot 5ª Geração">
+        <h3>Echo Dot (5ª geração)</h3>
+        <p>Smart speaker com Alexa e som de alta qualidade.</p>
+        <p class="preco">R$ 379,90</p>
+        <button onclick="adicionarAoCarrinho('Echo Dot 5ª geração', 379.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/71kwBzZEG2L._AC_UF894,1000_QL80_.jpg" alt="Cadeira Gamer ThunderX3">
+        <h3>Cadeira Gamer ThunderX3</h3>
+        <p>Ergonômica com ajuste de altura e apoio lombar.</p>
+        <p class="preco">R$ 899,90</p>
+        <button onclick="adicionarAoCarrinho('Cadeira Gamer ThunderX3', 899.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/monitor_29_gamer_lg_ips_ultra_wide_75_hz_1ms_full_hd_hdmi_displayport_black_29um69g_b_182583888_1_fb08903010f751a04dbf43f8f5bb086e.webp" alt="Monitor LG Ultrawide 29”">
+        <h3>Monitor LG Ultrawide 29”</h3>
+        <p>Full HD, 75Hz, HDR10, ideal para multitarefa.</p>
+        <p class="preco">R$ 1.299,90</p>
+        <button onclick="adicionarAoCarrinho('Monitor LG Ultrawide 29”', 1299.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/41TuRmSwACL._AC_UF1000,1000_QL80_.jpg" alt="Impressora HP DeskJet 2774">
+        <h3>Impressora HP DeskJet 2774</h3>
+        <p>Multifuncional com Wi-Fi, impressão, cópia e digitalização.</p>
+        <p class="preco">R$ 399,90</p>
+        <button onclick="adicionarAoCarrinho('Impressora HP DeskJet 2774', 399.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/c8c87ee966.webp" alt="HD Externo Seagate 1TB">
+        <h3>HD Externo Seagate 1TB</h3>
+        <p>USB 3.0, portátil, compatível com PC e Mac.</p>
+        <p class="preco">R$ 299,90</p>
+        <button onclick="adicionarAoCarrinho('HD Externo Seagate 1TB', 299.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <img src="file:///C:/Users/Microlins/OneDrive/Imagens/webcam-logitech-c920s-pro-full-hd-1080p-30-fps-audio-estereo-com-microfones-960-001257_1613999712_g.webp" alt="Webcam Logitech C920">
+        <h3>Webcam Logitech C920</h3>
+        <p>Full HD 1080p, microfone embutido, ideal para videoconferências.</p>
+        <p class="preco">R$ 499,90</p>
+        <button onclick="adicionarAoCarrinho('Webcam Logitech C920', 499.90)">Adicionar ao Carrinho</button>
+    </div>
+
+</main>
+
+<footer>
+    © 2025 Lojas Fávero - Todos os direitos reservados
+</footer>
+
+<script>
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    function adicionarAoCarrinho(produto, preco) {
+        carrinho.push({ produto, preco });
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarContador();
+        alert(`${produto} foi adicionado ao carrinho.`);
+    }
+
+    function atualizarContador() {
+        document.getElementById('carrinho-count').textContent = carrinho.length;
+    }
+
+    function mostrarCarrinho() {
+        window.location.href = 'carrinho.html';
+    }
+
+    atualizarContador(); // Atualiza ao carregar
+</script>
+
+</body>
+</html>
